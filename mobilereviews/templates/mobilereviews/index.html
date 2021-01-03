@@ -1,0 +1,25 @@
+{% extends "mobilereviews/layout.html" %}
+{% block body %}
+<div class="container">   
+    <h2>Public Ratings</h2>
+</div> 
+<div class="container" id="mobile_ratings">
+    {% for i in items %}
+    <div class="card mb-3" style="max-width: 540px;" id="card-listings">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{i.link}}" class="card-img" alt="mobile-image">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{i.title}}</h5>
+              <p class="card-text">{{i.description}}</p>
+              <p class="card-text">{{i.rating|floatformat:1}} / 10</p>
+              <a href="{% url 'mobile' i.id %}"><button class="btn btn-outline-success">Rate Now!</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+</div>
+{% endblock %}

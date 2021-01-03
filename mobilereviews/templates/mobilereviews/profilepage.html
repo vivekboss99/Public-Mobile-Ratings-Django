@@ -1,0 +1,32 @@
+{% extends "mobilereviews/layout.html" %}
+{% load static %}
+{% block body %}
+<div style="position: relative;">
+        <h1 style="color:grey;">
+             <div style="font-weight: bolder; height: 1.5rem; "> {{ user.username }}'s Ratings</div>
+        </h1> 
+    <hr style="border: 0px 0px 0px 0px;">
+    <div class="container" id="user_ratings">
+        {% for item in items %}
+            {% for i in item %}       
+            <div class="card mb-3" style="max-width: 540px;" id="card-listings">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img src="{{i.link}}" class="card-img" alt="mobile_image">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{i.title}}</h5>
+                      <p class="card-text">{{i.description}}</p>
+                      <p class="card-text"> {{i.rating|floatformat:1}} / 10</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% empty %}
+            <h3>You didn't rate any mobile.</h3>
+            {% endfor %}
+        </div>
+      </div>
+ {% endblock %}       

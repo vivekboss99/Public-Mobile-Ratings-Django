@@ -1,0 +1,31 @@
+{% extends "mobilereviews/layout.html" %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <h2>{{i.title}}</h2>
+    <div class="container" style="text-align: center;">
+        <img src="{{i.link}}" width="30%" alt="mobile-image">
+    </div>
+    <br>
+    <p><b>Information:</b>{{i.description}}</p>
+    <br>
+    <h3>Rating: {{ i.rating|floatformat:1 }} / 10</h3>
+    <br>
+    {% if user.username %}
+    <p>
+        {% if added %}
+            <h4>You have rated.</h4>
+        {% else %}
+        Your Rating:
+        <form action="{% url 'submitrating' i.id %}" method="POST">{% csrf_token %}  
+            <input type="number" min="0" max="10" step="0.5" name="urate" placeholder="enter your rating" value="{{ 9.0 }}">
+            <button type="submit" class="btn btn-primary mb-2">Rate</button>
+        </form>
+        {% endif %}             
+    </p>
+    {% else %}
+        <h3>You need to login to add your own rating.</h3>
+    {% endif %}
+</div>
+{% endblock %}
+
